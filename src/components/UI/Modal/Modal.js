@@ -15,7 +15,10 @@ const Modal = (props) => {
       >
         {props.children}
       </div>
-      <Backdrop show={true} />
+      <Backdrop 
+        onClick={props.onBackdropClick}
+        show={true}
+      />
     </Aux>
   );
 };
