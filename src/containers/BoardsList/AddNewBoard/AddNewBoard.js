@@ -48,6 +48,7 @@ class AddNewBoard extends Component {
           <h2 className={styles.Title}>Input name of new board:</h2>
           <div className={styles.ControlsWrapper}>
             <TextInput
+              autoFocus
               className={styles['AddNewBoard__input']}
               value={this.state.newBoardName}
               onChange={this.onInputeChange}
