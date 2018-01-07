@@ -25,13 +25,26 @@ class AddNewBoard extends Component {
       <Modal show={true} onBackdropClick={this.onClose}>
         <div className={styles.AddNewBoard}>
           <h2 className={styles.Title}>Input name of new board:</h2>
-          <TextInput
-            value={this.state.newBoardName}
-            onChange={this.onInputeChange}
-            placeholder='Name'
-          />
-          <Button>Confirm</Button>
-          <Button btnType="warning">Dismiss</Button>
+          <div className={styles.ControlsWrapper}>
+            <TextInput
+              className={styles['AddNewBoard__input']}
+              value={this.state.newBoardName}
+              onChange={this.onInputeChange}
+              placeholder='Name'
+            />
+            <Button
+              className={styles["AddNewBoard__button"]}
+            >
+              Confirm
+            </Button>
+            <Button
+              className={styles["AddNewBoard__button"]}
+              btnType="warning"
+              onClick={this.onClose}
+            >
+              Dismiss
+            </Button>
+          </div>
         </div>
       </Modal>
     );

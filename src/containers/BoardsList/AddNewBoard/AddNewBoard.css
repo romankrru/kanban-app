@@ -2,7 +2,20 @@
   padding: 20px;
 }
 
+.AddNewBoard__input {
+  width: 55%;
+}
+
+.AddNewBoard__button {
+  width: 20%;
+}
+
 .Title {
   margin-top: 0;
   color: #283593;
+}
+
+.ControlsWrapper {
+  display: flex;
+  justify-content: space-between;
 }
