@@ -38,7 +38,7 @@ class BoardsList extends Component {
       <div className={styles.BoardList}>
         {boardsElements}
         <AddNewBoardButton />
-        <Route to={`${this.props.location.pathname}/add-new-board`} component={AddNewBoard}/>
+        <Route path={`/add-new-board`} component={AddNewBoard}/>
       </div>
     );
   }
