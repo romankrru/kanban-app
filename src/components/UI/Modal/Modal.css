@@ -5,8 +5,14 @@
   left: 50%;
   transform: translateX(-50%);
 
-  width: 60%;
+  width: 80%;
 
   background-color: #fff;
   border-radius: 3px;
+}
+
+@media screen and (min-width: 1000px) {
+  .Modal {
+    width: 60%;
+  }
 }

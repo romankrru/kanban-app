@@ -23,6 +23,19 @@
   box-shadow: 1px 1px 14px rgba(0, 0, 0, 0.397);  
 }
 
+.BoardPreview::before {
+  content: '';
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  
+  width: 100%;
+  height: 4px;
+
+  background-image: linear-gradient(45deg, #df40fb, #42a4f5);
+}
+
 @media screen and (min-width: 1100px) {
   .BoardPreview {
     width: calc(25% - 40px);
