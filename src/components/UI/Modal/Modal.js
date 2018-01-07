@@ -15,7 +15,7 @@ const Modal = (props) => {
       >
         {props.children}
       </div>
-      <Backdrop />
+      <Backdrop show={true} />
     </Aux>
   );
 };

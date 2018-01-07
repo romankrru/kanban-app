@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 
 import BoardPreview from '../../components/BoardPreview/BoardPreview';
 import AddNewBoardButton from '../../components/BoardPreview/AddNewBoardButton/AddNewBoardButton';
+import AddNewBoard from './AddNewBoard/AddNewBoard';
 import styles from './BoardsList.css';
 
 class BoardsList extends Component {
@@ -31,10 +33,12 @@ class BoardsList extends Component {
       return <BoardPreview title={board.name} key={board.id} />
     });
 
+
     return (
       <div className={styles.BoardList}>
         {boardsElements}
         <AddNewBoardButton />
+        <Route to={`${this.props.location.pathname}/add-new-board`} component={AddNewBoard}/>
       </div>
     );
   }
