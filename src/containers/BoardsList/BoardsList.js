@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import BoardPreview from '../../components/BoardPreview/BoardPreview';
+import styles from './BoardsList.css';
 
 class BoardsList extends Component {
   state = {
@@ -12,16 +13,28 @@ class BoardsList extends Component {
       {
         id: '2',
         name: 'Board 2',
+      },
+      {
+        id: '3',
+        name: 'Board 2',
+      },
+      {
+        id: '4',
+        name: 'Board 2',
       }
     ]
   }
 
   render() {
-    const boardsElements = this.state.boards.map((board, index) => {
-      return <BoardPreview title={board.name} key={index} />
+    const boardsElements = this.state.boards.map((board) => {
+      return <BoardPreview title={board.name} key={board.id} />
     });
 
-    return boardsElements;
+    return (
+      <div className={styles.BoardList}>
+        {boardsElements}
+      </div>
+    );
   }
 }
 

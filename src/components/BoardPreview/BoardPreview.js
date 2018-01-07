@@ -1,13 +1,14 @@
 import React from 'react';
+import { Link, withRouter } from 'react-router-dom';
 
 import styles from './BoardPreview.css';
 
 const BoardPreview = (props) => {
   return (
-    <div className={styles.BoardPreview}>
+    <Link to="/board" className={styles.BoardPreview}>
       {props.title}
-    </div>
+    </Link>
   );
 }
 
-export default BoardPreview;
+export default withRouter(BoardPreview);
