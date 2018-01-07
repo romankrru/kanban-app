@@ -17,15 +17,19 @@ class BoardsList extends Component {
         id: '2',
         name: 'Board 2',
       },
-      {
-        id: '3',
-        name: 'Board 2',
-      },
-      {
-        id: '4',
-        name: 'Board 2',
-      }
     ]
+  }
+
+  onBoardAdd = (name, id) => {
+    const newBoards = [...this.state.boards];
+    newBoards.push({
+      name,
+      id,
+    });
+
+    this.setState({
+      boards: newBoards,
+    });
   }
 
   render() {
@@ -38,7 +42,7 @@ class BoardsList extends Component {
       <div className={styles.BoardList}>
         {boardsElements}
         <AddNewBoardButton />
-        <Route path={`/add-new-board`} component={AddNewBoard}/>
+        <Route path={`/add-new-board`} render={props => <AddNewBoard {...props} onBoardAdd={this.onBoardAdd} />}/>
       </div>
     );
   }

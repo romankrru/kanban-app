@@ -10,8 +10,29 @@ class AddNewBoard extends Component {
     newBoardName: '',
   }
 
+  componentDidMount() {
+    window.addEventListener('keypress', this.checkEnterPress);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keypress', this.checkEnterPress);
+  }
+
+  checkEnterPress = (e) => {
+    if (e.key === 'Enter') {
+      this.onBoardAdd();
+    }
+  }
+
   onClose = () => {
     this.props.history.push('/');
+  }
+
+  onBoardAdd = () => {
+    if (this.state.newBoardName) {
+      this.props.onBoardAdd(this.state.newBoardName, new Date());
+    }
+    this.props.history.push('/');    
   }
 
   onInputeChange = (e) => {
@@ -34,6 +55,7 @@ class AddNewBoard extends Component {
             />
             <Button
               className={styles["AddNewBoard__button"]}
+              onClick={this.onBoardAdd}
             >
               Confirm
             </Button>
