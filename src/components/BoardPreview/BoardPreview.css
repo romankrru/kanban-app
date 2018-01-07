@@ -1,4 +1,6 @@
 .BoardPreview {
+  position: relative;
+
   display: block;
   width: calc(33.33333% - 40px);
   margin: 20px;
@@ -25,4 +27,18 @@
   .BoardPreview {
     width: calc(25% - 40px);
   }
+}
+
+.BoardPreview .Trash {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  
+  width: 32px;
+  height: 32px;
+
+  background-image: url('../../assets/img/icons/trash-icon.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }

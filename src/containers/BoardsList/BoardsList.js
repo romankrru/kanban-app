@@ -32,9 +32,24 @@ class BoardsList extends Component {
     });
   }
 
+  onBoardDelete = (id) => {
+    const newBoards = this.state.boards.filter(board => board.id !== id);
+
+    this.setState({
+      boards: newBoards,
+    });
+  };
+
   render() {
     const boardsElements = this.state.boards.map((board) => {
-      return <BoardPreview title={board.name} key={board.id} />
+      return (
+        <BoardPreview
+          title={board.name}
+          key={board.id}
+          id={board.id}
+          onBoardDelete={this.onBoardDelete}
+        />
+      );
     });
 
 
