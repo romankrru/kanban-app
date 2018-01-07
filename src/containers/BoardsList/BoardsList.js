@@ -17,8 +17,8 @@ class BoardsList extends Component {
   }
 
   render() {
-    const boardsElements = this.state.boards.map((board) => {
-      return <BoardPreview title={board.name} />
+    const boardsElements = this.state.boards.map((board, index) => {
+      return <BoardPreview title={board.name} key={index} />
     });
 
     return boardsElements;
