@@ -1,0 +1,39 @@
+.AddNewBoardButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: calc(33.33333% - 40px);
+  margin: 20px;
+  height: 200px;
+  padding: 10px;
+
+  color: #646991;
+  font-weight: bold;
+  font-size: 24px;
+  
+  background-color: #e7e5e5;
+  border-radius: 3px;
+  text-decoration: none;
+  border: 4px dashed #646991;
+}
+
+.AddNewBoardButton::after {
+  content: '';
+
+  display: block;
+  margin-top: 10px;
+  width: 32px;
+  height: 32px;
+
+  background-image: url('../../../assets/img/icons/plus-icon.svg');
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+@media screen and (min-width: 1100px) {
+  .AddNewBoardButton {
+    width: calc(25% - 40px);
+  }
+}

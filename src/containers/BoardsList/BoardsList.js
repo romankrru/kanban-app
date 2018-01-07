@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import BoardPreview from '../../components/BoardPreview/BoardPreview';
+import AddNewBoardButton from '../../components/BoardPreview/AddNewBoardButton/AddNewBoardButton';
 import styles from './BoardsList.css';
 
 class BoardsList extends Component {
@@ -33,6 +34,7 @@ class BoardsList extends Component {
     return (
       <div className={styles.BoardList}>
         {boardsElements}
+        <AddNewBoardButton />
       </div>
     );
   }
