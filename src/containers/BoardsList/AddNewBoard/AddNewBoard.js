@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Modal from '../../../components/UI/Modal/Modal';
 import TextInput from '../../../components/UI/TextInput/TextInput';
+import Button from '../../../components/UI/Button/Button';
 import styles from './AddNewBoard.css';
 
 class AddNewBoard extends Component {
@@ -29,6 +30,8 @@ class AddNewBoard extends Component {
             onChange={this.onInputeChange}
             placeholder='Name'
           />
+          <Button>Confirm</Button>
+          <Button btnType="warning">Dismiss</Button>
         </div>
       </Modal>
     );
