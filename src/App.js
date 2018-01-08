@@ -10,7 +10,7 @@ class App extends Component {
     return (
       <Layout>
         <Switch>
-          <Route exact path="/board" component={Board} />
+          <Route exact path="/board/:id" component={Board} />
           <Route path="/" component={BoardsList} />
         </Switch>
       </Layout>
