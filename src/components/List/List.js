@@ -2,6 +2,7 @@ import React from 'react';
 
 import Card from './Card/Card';
 import styles from './List.css';
+import Editable from '../Editable/Editable';
 
 const List = (props) => {
   const cards = props.cards.map(card => {
@@ -20,7 +21,12 @@ const List = (props) => {
   
   return (
     <div className={styles.ListWrapper}>
-      <h3 className={styles.ListTitle}>{props.name}</h3>
+      <h3 className={styles.ListTitle}>
+        <Editable 
+          value={props.name}
+          onValueChange={(newValue) => props.onListTitleEdit(props.id, newValue)}
+        />
+      </h3>
       <div className={styles.Delete} />
       <ul className={styles.List}>
         {cards}
