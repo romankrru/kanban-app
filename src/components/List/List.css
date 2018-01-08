@@ -1,0 +1,97 @@
+.ListWrapper {
+  position: relative;
+
+  margin: 20px;
+  padding: 20px;
+  width: calc(33.33333% - 40px);
+  flex-basis: calc(33.33333% - 40px);
+  flex-shrink: 0;
+
+  background-color: #f2f2f2;
+  border-radius: 3px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, .15)
+}
+
+.ListWrapper::before {
+  content: '';
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  
+  width: 100%;
+  height: 4px;
+
+  background-image: linear-gradient(45deg, #df40fb, #42a4f5);
+}
+
+.List {
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.ListTitle {
+  margin-top: 0;
+
+  color: #283593;
+}
+
+.Delete {
+  position: absolute;
+  right: 20px;
+  top: 15px;
+
+  width: 32px;
+  height: 32px;
+
+  background-image: url('../../assets/img/icons/close-icon.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  cursor: pointer;
+}
+
+.AddCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #b6bbbe;
+
+  border-radius: 3px;
+
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+.AddCard:hover {
+  background-color: #e8e8e8;
+}
+
+.AddCard::before {
+  content: '';
+
+  display: block;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+
+  background-image: url('../../assets/img/icons/add-icon-grey.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+@media screen and (min-width: 1200px) {
+  .ListWrapper {
+    width: calc(25% - 40px);
+    flex-basis: calc(25% - 40px);
+  }
+}
