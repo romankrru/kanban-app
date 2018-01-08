@@ -62,13 +62,61 @@ class Board extends Component {
     ]
   }
 
+  onCardAdd = (listId) => {
+    const lists = [...this.state.lists];
+    const updatedLists = lists.map(l => {
+      if (l.id === listId) {
+        l.cards.push({
+          id: Math.random(),
+          name: 'New card',
+          date: new Date(),
+        });
+      }
+
+      return l;
+    });
+
+    this.setState({
+      lists: updatedLists,
+    });
+  }
+
+  onCardDelete = (listId, cardId) => {
+    const lists = [...this.state.lists];
+
+    const listIndex = this.state.lists.findIndex(l => {
+      return l.id === listId;
+    });
+
+    const list = { ...lists[listIndex] };
+
+    const cardIndex = list.cards.findIndex(c => {
+      return c.id === cardId;
+    });
+
+    list.cards.splice(cardIndex, 1);
+
+    const updatedLists = [
+      ...this.state.lists.slice(0, listIndex),
+      list,
+      ...this.state.lists.slice(listIndex + 1),
+    ];
+
+    this.setState({
+      lists: updatedLists,
+    });
+  };
+
   render() {
     const lists = this.state.lists.map(list => {
       return (
         <List
+          id={list.id}
           key={list.id}
           name={list.name}
           cards={list.cards}
+          onCardAdd={this.onCardAdd}
+          onCardDelete={this.onCardDelete}
         />
       );
     });

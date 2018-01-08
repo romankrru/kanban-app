@@ -11,6 +11,8 @@ const List = (props) => {
         key={card.id}
         name={card.name}
         date={card.date}
+        listId={props.id}
+        onCardDelete={props.onCardDelete}
       />
     );
   });
@@ -22,7 +24,10 @@ const List = (props) => {
       <ul className={styles.List}>
         {cards}
       </ul>
-      <div className={styles.AddCard}>
+      <div
+        className={styles.AddCard}
+        onClick={() => props.onCardAdd(props.id)}
+      >
         Add new Card
       </div>
     </div>
