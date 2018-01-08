@@ -156,6 +156,20 @@ class Board extends Component {
     });
   }
 
+  onListAdd = () => {
+    const newList = {
+      name: 'New List',
+      id: Math.random(),
+      cards: [],
+    }
+
+    const updatedLists = this.state.lists.concat([newList]);
+
+    this.setState({
+      lists: updatedLists,
+    });
+  }
+
   render() {
     const lists = this.state.lists.map(list => {
       return (
@@ -175,7 +189,7 @@ class Board extends Component {
     return (
       <div className={styles.Board}>
         {lists}
-        <AddNewList />
+        <AddNewList onListAdd={this.onListAdd} />
       </div>
     );
   };
