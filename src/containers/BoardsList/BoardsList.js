@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import BoardPreview from '../../components/BoardPreview/BoardPreview';
 import AddNewBoardButton from '../../components/BoardPreview/AddNewBoardButton/AddNewBoardButton';
@@ -7,18 +8,18 @@ import AddNewBoard from './AddNewBoard/AddNewBoard';
 import styles from './BoardsList.css';
 
 class BoardsList extends Component {
-  state = {
-    boards: [
-      {
-        id: '1',
-        name: 'Board 1',
-      },
-      {
-        id: '2',
-        name: 'Board 2',
-      },
-    ]
-  }
+  // state = {
+  //   boards: [
+  //     {
+  //       id: '1',
+  //       name: 'Board 1',
+  //     },
+  //     {
+  //       id: '2',
+  //       name: 'Board 2',
+  //     },
+  //   ]
+  // }
 
   onBoardAdd = (name, id) => {
     const newBoards = [...this.state.boards];
@@ -41,7 +42,7 @@ class BoardsList extends Component {
   };
 
   render() {
-    const boardsElements = this.state.boards.map((board) => {
+    const boardsElements = this.props.boards.map((board) => {
       return (
         <BoardPreview
           title={board.name}
@@ -57,10 +58,14 @@ class BoardsList extends Component {
       <div className={styles.BoardList}>
         {boardsElements}
         <AddNewBoardButton />
-        <Route path={`/add-new-board`} render={props => <AddNewBoard {...props} onBoardAdd={this.onBoardAdd} />}/>
+        <Route path={`/add-new-board`} render={props => <AddNewBoard {...props} onBoardAdd={this.onBoardAdd} />} />
       </div>
     );
   }
 }
 
-export default BoardsList;
+const mapStateToProps = state => ({
+  boards: state.boards,
+});
+
+export default connect(mapStateToProps)(BoardsList);
