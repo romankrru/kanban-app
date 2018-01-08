@@ -1,0 +1,51 @@
+.AddNewListWrapper {
+  width: calc(33.33333% - 40px);
+  flex-basis: calc(33.33333% - 40px);
+  flex-shrink: 0;
+}
+
+.AddNewList {
+  display: flex;
+  margin: 20px;
+  margin-top: 0;
+  padding: 20px;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #b6bbbe;
+
+  border-radius: 3px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, .15);
+
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+.AddNewList:hover {
+  background-color: #f1f1f1;
+}
+
+.AddNewList::before {
+  content: '';
+
+  display: block;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+
+  background-image: url('../../../assets/img/icons/add-icon-grey.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+@media screen and (min-width: 1200px) {
+  .AddNewListWrapper {
+    width: calc(25% - 40px);
+    flex-basis: calc(25% - 40px);
+  }
+}

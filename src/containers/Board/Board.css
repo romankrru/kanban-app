@@ -1,4 +1,9 @@
 .Board {
   display: flex;
   align-items: flex-start;
+  padding-top: 20px;
+  padding-left: 20px;
+  min-height: calc(100vh - 70px);
+  
+  overflow-x: auto;
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import List from '../../components/List/List';
+import AddNewList from './AddNewList/AddNewList';
 import styles from './Board.css';
 
 class Board extends Component {
@@ -151,6 +152,7 @@ class Board extends Component {
     return (
       <div className={styles.Board}>
         {lists}
+        <AddNewList />
       </div>
     );
   };
