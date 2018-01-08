@@ -13,6 +13,7 @@ const List = (props) => {
         date={card.date}
         listId={props.id}
         onCardDelete={props.onCardDelete}
+        onCardEdit={props.onCardEdit}
       />
     );
   });

@@ -107,6 +107,32 @@ class Board extends Component {
     });
   };
 
+  onCardEdit = (listId, cardId, newValue) => {
+    const lists = [...this.state.lists];
+
+    const listIndex = this.state.lists.findIndex(l => {
+      return l.id === listId;
+    });
+
+    const list = { ...lists[listIndex] };
+
+    const cardIndex = list.cards.findIndex(c => {
+      return c.id === cardId;
+    });
+
+    list.cards[cardIndex].name = newValue;
+
+    const updatedLists = [
+      ...this.state.lists.slice(0, listIndex),
+      list,
+      ...this.state.lists.slice(listIndex + 1),
+    ];
+
+    this.setState({
+      lists: updatedLists,
+    });
+  }
+
   render() {
     const lists = this.state.lists.map(list => {
       return (
@@ -117,6 +143,7 @@ class Board extends Component {
           cards={list.cards}
           onCardAdd={this.onCardAdd}
           onCardDelete={this.onCardDelete}
+          onCardEdit={this.onCardEdit}
         />
       );
     });
