@@ -2,24 +2,16 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import * as actions from '../../store/actions';
 import BoardPreview from '../../components/BoardPreview/BoardPreview';
 import AddNewBoardButton from '../../components/BoardPreview/AddNewBoardButton/AddNewBoardButton';
 import AddNewBoard from './AddNewBoard/AddNewBoard';
 import styles from './BoardsList.css';
 
 class BoardsList extends Component {
-  // state = {
-  //   boards: [
-  //     {
-  //       id: '1',
-  //       name: 'Board 1',
-  //     },
-  //     {
-  //       id: '2',
-  //       name: 'Board 2',
-  //     },
-  //   ]
-  // }
+  componentDidMount() {
+    this.props.fetchBoards();
+  }
 
   onBoardAdd = (name, id) => {
     const newBoards = [...this.state.boards];
@@ -42,17 +34,31 @@ class BoardsList extends Component {
   };
 
   render() {
-    const boardsElements = this.props.boards.map((board) => {
+    if (Object.keys(this.props.boards).length == 0 ) {
+      return null;
+    }
+
+    const boardsElements = Object.keys(this.props.boards).map(key => {
       return (
         <BoardPreview
-          title={board.name}
-          key={board.id}
-          id={board.id}
+          title={this.props.boards[key].name}
+          key={key}
+          id={key}
           onBoardDelete={this.onBoardDelete}
         />
       );
     });
 
+    // const boardsElements = this.props.boards.map((board) => {
+    //   return (
+    //     <BoardPreview
+    //       title={board.name}
+    //       key={board.id}
+    //       id={board.id}
+    //       onBoardDelete={this.onBoardDelete}
+    //     />
+    //   );
+    // });
 
     return (
       <div className={styles.BoardList}>
@@ -65,7 +71,11 @@ class BoardsList extends Component {
 }
 
 const mapStateToProps = state => ({
-  boards: state.boards,
+  boards: state.boards.items,
 });
 
-export default connect(mapStateToProps)(BoardsList);
+const mapDispatchToProps = dispatch => ({
+  fetchBoards: () => dispatch(actions.fetchBoards()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(BoardsList);
