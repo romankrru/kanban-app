@@ -27,7 +27,10 @@ const List = (props) => {
           onValueChange={(newValue) => props.onListTitleEdit(props.id, newValue)}
         />
       </h3>
-      <div className={styles.Delete} />
+      <div
+        className={styles.Delete} 
+        onClick={() => props.onListRemove(props.id)}
+      />
       <ul className={styles.List}>
         {cards}
       </ul>
