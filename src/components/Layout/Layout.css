@@ -1,5 +1,6 @@
 .Layout {
   min-height: 100vh;
   
-  background-color: #ebebeb;
+  background-color: rgb(36, 3, 43);
+  background-image: url('../../assets/img/bg/bg-main.png');
 }
