@@ -1,9 +1,10 @@
+/* eslint-disable */
 import React from 'react';
 
 import styles from './Button.css';
 
 const Button = ({ btnType, className, ...props }) => {
-  const wrapperAttachedClasses = [styles.ButtonWrapper, className]
+  const wrapperAttachedClasses = [styles.ButtonWrapper, className];
   const buttonAttachedClasses = [styles.Button];
 
   if (btnType == 'warning') {

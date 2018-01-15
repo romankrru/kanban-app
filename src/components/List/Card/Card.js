@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 
 import Editable from '../../Editable/Editable';

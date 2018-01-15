@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 
 import Modal from '../../../components/UI/Modal/Modal';
