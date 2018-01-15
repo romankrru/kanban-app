@@ -4,11 +4,13 @@
   left: 50%;
   transform: translate(-50%, 0);
   display: flex;
+  opacity: 1;
   transition: all .4s ease;
 }
 
 .SpinnerHidden {
   transform: translate(-50%, -120px);
+  opacity: 0;
 }
 
 .SpinnerText {
