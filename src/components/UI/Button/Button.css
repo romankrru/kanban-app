@@ -33,10 +33,6 @@
   transition: all .2s ease;
 }
 
-.ButtonWarning {
-  /* color: rgb(124, 31, 31); */
-}
-
 .Button:hover {
   color: white;
   background-color: transparent;
