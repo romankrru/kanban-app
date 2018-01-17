@@ -1,9 +1,8 @@
-/* eslint-disable */
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
   items: {},
-  loading: false
+  loading: false,
 };
 
 const boardsReducer = (state = initialState, action) => {
