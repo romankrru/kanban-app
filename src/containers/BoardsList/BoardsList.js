@@ -14,9 +14,10 @@ class BoardsList extends Component {
   componentDidMount() {
     this.props.fetchBoards();
   }
-
+  
+  // TODO: Fix new board creation 
   onBoardAdd = (name, id) => {
-    const newBoards = [...this.state.boards];
+    const newBoards = [...this.props.boards];
     newBoards.push({
       name,
       id,
@@ -28,7 +29,7 @@ class BoardsList extends Component {
   }
 
   onBoardDelete = (id) => {
-    const newBoards = this.state.boards.filter(board => board.id !== id);
+    const newBoards = this.props.boards.filter(board => board.id !== id);
 
     this.setState({
       boards: newBoards,
