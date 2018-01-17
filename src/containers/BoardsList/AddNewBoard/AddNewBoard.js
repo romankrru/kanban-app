@@ -1,5 +1,5 @@
-/* eslint-disable */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import Modal from '../../../components/UI/Modal/Modal';
 import TextInput from '../../../components/UI/TextInput/TextInput';
@@ -19,12 +19,6 @@ class AddNewBoard extends Component {
     window.removeEventListener('keypress', this.checkEnterPress);
   }
 
-  checkEnterPress = (e) => {
-    if (e.key === 'Enter') {
-      this.onBoardAdd();
-    }
-  }
-
   onClose = () => {
     this.props.history.push('/');
   }
@@ -33,7 +27,7 @@ class AddNewBoard extends Component {
     if (this.state.newBoardName) {
       this.props.onBoardAdd(this.state.newBoardName, new Date());
     }
-    this.props.history.push('/');    
+    this.props.history.push('/');
   }
 
   onInputeChange = (e) => {
@@ -42,27 +36,33 @@ class AddNewBoard extends Component {
     });
   }
 
+  checkEnterPress = (e) => {
+    if (e.key === 'Enter') {
+      this.onBoardAdd();
+    }
+  }
+
   render() {
     return (
-      <Modal show={true} onBackdropClick={this.onClose}>
+      <Modal show onBackdropClick={this.onClose}>
         <div className={styles.AddNewBoard}>
           <h2 className={styles.Title}>Input name of new board:</h2>
           <div className={styles.ControlsWrapper}>
             <TextInput
               autoFocus
-              className={styles['AddNewBoard__input']}
+              className={styles.AddNewBoard__input}
               value={this.state.newBoardName}
               onChange={this.onInputeChange}
-              placeholder='Name'
+              placeholder="Name"
             />
             <Button
-              className={styles["AddNewBoard__button"]}
+              className={styles.AddNewBoard__button}
               onClick={this.onBoardAdd}
             >
               Confirm
             </Button>
             <Button
-              className={styles["AddNewBoard__button"]}
+              className={styles.AddNewBoard__button}
               btnType="warning"
               onClick={this.onClose}
             >
@@ -74,5 +74,10 @@ class AddNewBoard extends Component {
     );
   }
 }
+
+AddNewBoard.propTypes = {
+  history: PropTypes.objectOf(PropTypes.any).isRequired,
+  onBoardAdd: PropTypes.func.isRequired,
+};
 
 export default AddNewBoard;
