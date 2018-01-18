@@ -1,44 +1,37 @@
-/* eslint-disable */
 import axios from 'axios';
 
 import * as actionTypes from './actionTypes';
 
-const fetchBoardsStart = () => {
-  return {
-    type: actionTypes.FETCH_BOARDS_START,
-  }
-};
+const fetchBoardsStart = () => ({
+  type: actionTypes.FETCH_BOARDS_START,
+});
 
-const fetchBoardsSuccess = (boards) => {
-  return {
-    type: actionTypes.FETCH_BOARDS_SUCCESS,
-    boards: boards,
-  }
-};
+const fetchBoardsSuccess = boards => ({
+  type: actionTypes.FETCH_BOARDS_SUCCESS,
+  boards,
+});
 
-const fetchBoardsFail = () => {
-  return {
-    type: actionTypes.FETCH_BOARDS_FAIL,
-  }
-};
+const fetchBoardsFail = () => ({
+  type: actionTypes.FETCH_BOARDS_FAIL,
+});
 
 export const fetchBoards = () => (dispatch) => {
-  dispatch(fetchBoardsStart())
+  dispatch(fetchBoardsStart());
 
   axios.get('https://kanban-580f4.firebaseio.com/boards.json')
-    .then(res => {
+    .then((res) => {
       dispatch(fetchBoardsSuccess(res.data));
     })
-    .catch(err => {
+    .catch((err) => {
       dispatch(fetchBoardsFail(err));
+      /* eslint-disable no-console */
       console.log(err);
+      /* eslint-enable no-console */
     });
 };
 
-export const addBoard = (name, userId) => {
-  return {
-    type: actionTypes.ADD_BOARD,
-    name,
-    userId,
-  }
-};
+export const addBoard = (name, userId) => ({
+  type: actionTypes.ADD_BOARD,
+  name,
+  userId,
+});
