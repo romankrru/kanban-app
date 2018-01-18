@@ -1,3 +1,5 @@
+import uuidv4 from 'uuid/v4';
+
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
@@ -24,6 +26,18 @@ const boardsReducer = (state = initialState, action) => {
         ...state,
         items: action.boards,
         loading: false,
+      };
+
+    case actionTypes.ADD_BOARD:
+      return {
+        ...state,
+        items: {
+          ...state.items,
+          [uuidv4()]: {
+            name: action.name,
+            userId: action.userId,
+          },
+        },
       };
 
     default:

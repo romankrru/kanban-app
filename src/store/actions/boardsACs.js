@@ -32,5 +32,13 @@ export const fetchBoards = () => (dispatch) => {
     .catch(err => {
       dispatch(fetchBoardsFail(err));
       console.log(err);
-    })
-}
+    });
+};
+
+export const addBoard = (name, userId) => {
+  return {
+    type: actionTypes.ADD_BOARD,
+    name,
+    userId,
+  }
+};

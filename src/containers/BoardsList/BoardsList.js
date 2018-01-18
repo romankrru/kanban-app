@@ -14,19 +14,6 @@ class BoardsList extends Component {
   componentDidMount() {
     this.props.fetchBoards();
   }
-  
-  // TODO: Fix new board creation 
-  onBoardAdd = (name, id) => {
-    const newBoards = [...this.props.boards];
-    newBoards.push({
-      name,
-      id,
-    });
-
-    this.setState({
-      boards: newBoards,
-    });
-  }
 
   onBoardDelete = (id) => {
     const newBoards = this.props.boards.filter(board => board.id !== id);
@@ -53,7 +40,7 @@ class BoardsList extends Component {
         <Spinner show={this.props.isLoading} />
         {boardsElements}
         <AddNewBoardButton />
-        <Route path={`/add-new-board`} render={props => <AddNewBoard {...props} onBoardAdd={this.onBoardAdd} />} />
+        <Route path={`/add-new-board`} render={props => <AddNewBoard {...props} onBoardAdd={this.props.onBoardAdd} />} />
       </div>
     );
   }
@@ -66,6 +53,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchBoards: () => dispatch(actions.fetchBoards()),
+  onBoardAdd: (name, userId) => dispatch(actions.addBoard(name, userId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BoardsList);

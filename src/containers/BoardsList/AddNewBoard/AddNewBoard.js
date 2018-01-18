@@ -25,7 +25,7 @@ class AddNewBoard extends Component {
 
   onBoardAdd = () => {
     if (this.state.newBoardName) {
-      this.props.onBoardAdd(this.state.newBoardName, new Date());
+      this.props.onBoardAdd(this.state.newBoardName, 'user1');
     }
     this.props.history.push('/');
   }

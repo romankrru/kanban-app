@@ -1,4 +1,5 @@
 /* eslint-disable */
 export {
-  fetchBoards
+  fetchBoards,
+  addBoard,
 } from './boardsACs.js';
