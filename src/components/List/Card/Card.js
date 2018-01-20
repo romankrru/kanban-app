@@ -9,7 +9,7 @@ const Card = (props) => {
     <li className={styles.Card}>
       <Editable
         value={props.name}
-        onValueChange={(newValue) => props.onCardEdit(props.listId, props.id, newValue)}  
+        onValueChange={(newValue) => props.onCardEdit(props.id, newValue)}  
       />
       <div
         className={styles.Delete}

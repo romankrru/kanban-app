@@ -41,55 +41,15 @@ class Board extends Component {
       .database()
       .ref(`/cards/${cardId}`)
       .remove();
-    // const lists = [...this.state.lists];
-
-    // const listIndex = this.state.lists.findIndex(l => {
-    //   return l.id === listId;
-    // });
-
-    // const list = { ...lists[listIndex] };
-
-    // const cardIndex = list.cards.findIndex(c => {
-    //   return c.id === cardId;
-    // });
-
-    // list.cards.splice(cardIndex, 1);
-
-    // const updatedLists = [
-    //   ...this.state.lists.slice(0, listIndex),
-    //   list,
-    //   ...this.state.lists.slice(listIndex + 1),
-    // ];
-
-    // this.setState({
-    //   lists: updatedLists,
-    // });
   };
 
-  onCardEdit = (listId, cardId, newValue) => {
-    const lists = [...this.state.lists];
-
-    const listIndex = this.state.lists.findIndex(l => {
-      return l.id === listId;
-    });
-
-    const list = { ...lists[listIndex] };
-
-    const cardIndex = list.cards.findIndex(c => {
-      return c.id === cardId;
-    });
-
-    list.cards[cardIndex].name = newValue;
-
-    const updatedLists = [
-      ...this.state.lists.slice(0, listIndex),
-      list,
-      ...this.state.lists.slice(listIndex + 1),
-    ];
-
-    this.setState({
-      lists: updatedLists,
-    });
+  onCardEdit = (cardId, newText) => {
+    const cardsRef = firebase
+      .database()
+      .ref(`/cards/${cardId}`)
+      .update({
+        'name': newText,
+      });
   }
 
   onListTitleEdit = (listId, newTitle) => {
@@ -136,8 +96,6 @@ class Board extends Component {
   }
 
   render() {
-    console.log(this.props)
-
     const lists = Object.keys(this.props.lists).map(key => {
       return (
         <List
