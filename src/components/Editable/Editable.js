@@ -9,6 +9,12 @@ class Editable extends Component {
     value: this.props.value,
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      value: nextProps.value,
+    });
+  }
+
   onClick = () => {
     this.setState({
       isEditing: true,
