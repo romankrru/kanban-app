@@ -13,7 +13,7 @@ const Card = (props) => {
       />
       <div
         className={styles.Delete}
-        onClick={() => props.onCardDelete(props.listId, props.id)}
+        onClick={() => props.onCardDelete(props.id)}
       />
     </li>
   );
