@@ -1,5 +1,3 @@
-import uuidv4 from 'uuid/v4';
-
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
@@ -33,7 +31,7 @@ const boardsReducer = (state = initialState, action) => {
         ...state,
         items: {
           ...state.items,
-          [uuidv4()]: {
+          [action.bordId]: {
             name: action.name,
             userId: action.userId,
           },

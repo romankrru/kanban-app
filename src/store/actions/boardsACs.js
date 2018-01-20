@@ -1,4 +1,5 @@
 import axios from 'axios';
+import uuidv4 from 'uuid/v4';
 
 import * as actionTypes from './actionTypes';
 
@@ -32,6 +33,7 @@ export const fetchBoards = () => (dispatch) => {
 
 export const addBoard = (name, userId) => ({
   type: actionTypes.ADD_BOARD,
+  boardId: uuidv4(),
   name,
   userId,
 });
