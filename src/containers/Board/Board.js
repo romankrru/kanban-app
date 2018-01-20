@@ -91,25 +91,12 @@ class Board extends Component {
   }
 
   onListTitleEdit = (listId, newTitle) => {
-    const lists = [...this.state.lists];
-
-    const listIndex = this.state.lists.findIndex(l => {
-      return l.id === listId;
-    });
-
-    const list = { ...lists[listIndex] };
-
-    list.name = newTitle;
-
-    const updatedLists = [
-      ...this.state.lists.slice(0, listIndex),
-      list,
-      ...this.state.lists.slice(listIndex + 1),
-    ];
-
-    this.setState({
-      lists: updatedLists,
-    });
+    const listsRef = firebase
+      .database()
+      .ref(`/lists/${listId}`)
+      .update({
+        'name': newTitle,
+      });
   }
 
   onListAdd = (boardId, userId) => {
@@ -125,18 +112,6 @@ class Board extends Component {
       .push();
 
     listsRef.set(newList);
-
-    // const newList = {
-    //   name: 'New List',
-    //   id: Math.random(),
-    //   cards: [],
-    // }
-
-    // const updatedLists = this.state.lists.concat([newList]);
-
-    // this.setState({
-    //   lists: updatedLists,
-    // });
   }
 
   onListRemove = (listId) => {
@@ -144,26 +119,9 @@ class Board extends Component {
       .database()
       .ref(`/lists/${listId}`)
       .remove();
-
-
-    // const lists = [...this.state.lists];
-
-    // const listIndex = this.state.lists.findIndex(l => {
-    //   return l.id === listId;
-    // });
-
-    // const updatedLists = [
-    //   ...this.state.lists.slice(0, listIndex),
-    //   ...this.state.lists.slice(listIndex + 1),
-    // ];
-
-    // this.setState({
-    //   lists: updatedLists,
-    // });
   }
 
   render() {
-    console.log(this.props.lists);
     const lists = Object.keys(this.props.lists).map(key => {
       return (
         <List
@@ -179,21 +137,6 @@ class Board extends Component {
         />
       );
     });
-    // this.props.lists.map(list => {
-    //   return (
-    //     <List
-    //       id={list.id}
-    //       key={list.id}
-    //       name={list.name}
-    //       cards={list.cards}
-    //       onCardAdd={this.onCardAdd}
-    //       onCardDelete={this.onCardDelete}
-    //       onCardEdit={this.onCardEdit}
-    //       onListTitleEdit={this.onListTitleEdit}
-    //       onListRemove={this.onListRemove}
-    //     />
-    //   );
-    // });
 
     return (
       <div className={styles.Board}>
