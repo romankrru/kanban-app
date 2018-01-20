@@ -10,6 +10,7 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import boardsReducer from './store/reducers/boardsReducer';
+import boardReducer from './store/reducers/boardReducer';
 
 let composeEnhancers;
 
@@ -21,6 +22,7 @@ if (process.env.NODE_ENV === 'development') {
 
 const rootReducer = combineReducers({
   boards: boardsReducer,
+  board: boardReducer,
 });
 
 const store = createStore(

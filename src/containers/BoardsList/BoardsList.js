@@ -35,6 +35,9 @@ class BoardsList extends Component {
       .database()
       .ref(`/boards/${boardId}`)
       .remove();
+
+    // console.log(firebase
+    //   .database().ref('boards'));
   }
 
   render() {

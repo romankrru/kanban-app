@@ -5,5 +5,5 @@ export {
 } from './boardsACs.js';
 
 export {
-  fetchLists,
+  initLists,
 } from './boardACs.js';

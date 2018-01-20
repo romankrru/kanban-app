@@ -2,74 +2,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import firebase from '../../firebase';
 import * as actions from '../../store/actions';
 import List from '../../components/List/List';
 import AddNewList from './AddNewList/AddNewList';
 import styles from './Board.css';
 
 class Board extends Component {
-  state = {
-    lists: [
-      {
-        name: 'Todo',
-        id: 1,
-        cards: [
-          {
-            id: 1,
-            name: 'learn react',
-            date: new Date()
-          },
-          {
-            id: 2,
-            name: 'learn redux',
-            date: new Date()
-          },
-          {
-            id: 3,
-            name: 'card 3',
-            date: new Date()
-          },
-          {
-            id: 4,
-            name: 'card 4',
-            date: new Date()
-          }
-        ]
-      },
-      {
-        name: 'In proogress',
-        id: 2,
-        cards: [
-          {
-            id: 1,
-            name: 'card 1',
-            date: new Date()
-          },
-          {
-            id: 2,
-            name: 'card 2',
-            date: new Date()
-          },
-        ]
-      },
-      {
-        name: 'Done',
-        id: 3,
-        cards: [
-          {
-            id: 1,
-            name: 'card 1',
-            date: new Date()
-          },
-        ]
-      }
-    ]
-  }
-
   componentDidMount() {
-    this.props.onListsFetch(
+    this.props.onListsInit(
       this.props.match.params.id
     );
+  }
+
+  componentWillUnmount() {
+    // TODO: usnsubscribe from firebase
   }
 
   onCardAdd = (listId) => {
@@ -165,45 +112,65 @@ class Board extends Component {
     });
   }
 
-  onListAdd = () => {
+  onListAdd = (boardId, userId) => {
     const newList = {
       name: 'New List',
-      id: Math.random(),
-      cards: [],
-    }
+      boardId,
+      userId,
+    };
 
-    const updatedLists = this.state.lists.concat([newList]);
+    const listsRef = firebase
+      .database()
+      .ref(`/lists/`)
+      .push();
 
-    this.setState({
-      lists: updatedLists,
-    });
+    listsRef.set(newList);
+
+    // const newList = {
+    //   name: 'New List',
+    //   id: Math.random(),
+    //   cards: [],
+    // }
+
+    // const updatedLists = this.state.lists.concat([newList]);
+
+    // this.setState({
+    //   lists: updatedLists,
+    // });
   }
 
   onListRemove = (listId) => {
-    const lists = [...this.state.lists];
+    const listsRef = firebase
+      .database()
+      .ref(`/lists/${listId}`)
+      .remove();
 
-    const listIndex = this.state.lists.findIndex(l => {
-      return l.id === listId;
-    });
 
-    const updatedLists = [
-      ...this.state.lists.slice(0, listIndex),
-      ...this.state.lists.slice(listIndex + 1),
-    ];
+    // const lists = [...this.state.lists];
 
-    this.setState({
-      lists: updatedLists,
-    });
+    // const listIndex = this.state.lists.findIndex(l => {
+    //   return l.id === listId;
+    // });
+
+    // const updatedLists = [
+    //   ...this.state.lists.slice(0, listIndex),
+    //   ...this.state.lists.slice(listIndex + 1),
+    // ];
+
+    // this.setState({
+    //   lists: updatedLists,
+    // });
   }
 
   render() {
-    const lists = this.state.lists.map(list => {
+    console.log(this.props.lists);
+    const lists = Object.keys(this.props.lists).map(key => {
       return (
         <List
-          id={list.id}
-          key={list.id}
-          name={list.name}
-          cards={list.cards}
+          id={key}
+          key={key}
+          name={this.props.lists[key].name}
+          cards={[]}
           onCardAdd={this.onCardAdd}
           onCardDelete={this.onCardDelete}
           onCardEdit={this.onCardEdit}
@@ -212,18 +179,42 @@ class Board extends Component {
         />
       );
     });
+    // this.props.lists.map(list => {
+    //   return (
+    //     <List
+    //       id={list.id}
+    //       key={list.id}
+    //       name={list.name}
+    //       cards={list.cards}
+    //       onCardAdd={this.onCardAdd}
+    //       onCardDelete={this.onCardDelete}
+    //       onCardEdit={this.onCardEdit}
+    //       onListTitleEdit={this.onListTitleEdit}
+    //       onListRemove={this.onListRemove}
+    //     />
+    //   );
+    // });
 
     return (
       <div className={styles.Board}>
         {lists}
-        <AddNewList onListAdd={this.onListAdd} />
+        <AddNewList
+          userId={'user1'}
+          boardId={this.props.match.params.id}
+          onListAdd={this.onListAdd}
+        />
       </div>
     );
   };
 }
 
-const mapDispatchToProps = dispatch => ({
-  onListsFetch: (boardId) => dispatch(actions.fetchLists(boardId))
+const mapStateToProps = state => ({
+  lists: state.board.lists,
+  cards: state.board.cards,
 });
 
-export default connect(null, mapDispatchToProps)(Board);
+const mapDispatchToProps = dispatch => ({
+  onListsInit: (boardId) => dispatch(actions.initLists(boardId))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Board);

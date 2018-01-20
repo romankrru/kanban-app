@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -7,12 +8,12 @@ const AddNewList = props => (
   <div className={styles.AddNewListWrapper}>
     <div
       className={styles.AddNewList}
-      onClick={props.onListAdd}
+      onClick={() => props.onListAdd(props.boardId, props.userId)}
       role="button"
       onKeyPress={props.onListAdd}
       tabIndex="0"
     >
-        Add new List
+      Add new List
     </div>
   </div>
 );
