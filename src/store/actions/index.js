@@ -6,4 +6,5 @@ export {
 
 export {
   initLists,
+  initCards,
 } from './boardACs.js';

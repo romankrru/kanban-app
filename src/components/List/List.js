@@ -6,19 +6,32 @@ import styles from './List.css';
 import Editable from '../Editable/Editable';
 
 const List = (props) => {
-  const cards = props.cards.map(card => {
+  
+  const cards = Object.keys(props.cards).map(key => {
     return (
       <Card
-        id={card.id}
-        key={card.id}
-        name={card.name}
-        date={card.date}
-        listId={props.id}
+        id={key}
+        key={key}
+        name={props.cards[key].name}
+        listId={props.cards[key].listId}
         onCardDelete={props.onCardDelete}
         onCardEdit={props.onCardEdit}
       />
     );
   });
+  // props.cards.map(card => {
+  //   return (
+  //     <Card
+  //       id={card.id}
+  //       key={card.id}
+  //       name={card.name}
+  //       date={card.date}
+  //       listId={props.id}
+  //       onCardDelete={props.onCardDelete}
+  //       onCardEdit={props.onCardEdit}
+  //     />
+  //   );
+  // });
   
   return (
     <div className={styles.ListWrapper}>

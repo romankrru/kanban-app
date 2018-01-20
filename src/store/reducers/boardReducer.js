@@ -12,7 +12,13 @@ const boardReducer = (state = initialState, action) => {
       return {
         ...state,
         lists: action.lists,
-      }
+      };
+
+    case actionTypes.UPDATE_CARDS:
+      return {
+        ...state,
+        cards: action.cards,
+      };
 
     default:
       return state;

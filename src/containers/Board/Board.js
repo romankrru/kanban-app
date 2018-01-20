@@ -10,9 +10,10 @@ import styles from './Board.css';
 
 class Board extends Component {
   componentDidMount() {
-    this.props.onListsInit(
-      this.props.match.params.id
-    );
+    const boardId = this.props.match.params.id
+
+    this.props.onListsInit(boardId);
+    this.props.onCardsInit(boardId);
   }
 
   componentWillUnmount() {
@@ -121,6 +122,18 @@ class Board extends Component {
       .remove();
   }
 
+  getVisibleCards = (cards, listId) => {
+    const visibleCards = {};
+
+    Object.keys(cards).forEach(key => {
+      if (cards[key].listId === listId) {
+        visibleCards[key] = cards[key];
+      }
+    });
+
+    return visibleCards;
+  }
+
   render() {
     const lists = Object.keys(this.props.lists).map(key => {
       return (
@@ -128,7 +141,7 @@ class Board extends Component {
           id={key}
           key={key}
           name={this.props.lists[key].name}
-          cards={[]}
+          cards={this.getVisibleCards(this.props.cards, key)}
           onCardAdd={this.onCardAdd}
           onCardDelete={this.onCardDelete}
           onCardEdit={this.onCardEdit}
@@ -157,7 +170,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onListsInit: (boardId) => dispatch(actions.initLists(boardId))
+  onListsInit: (boardId) => dispatch(actions.initLists(boardId)),
+  onCardsInit: (boardId) => dispatch(actions.initCards(boardId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Board);
