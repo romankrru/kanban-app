@@ -1,6 +1,8 @@
 /* eslint-disable */
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
+import * as actions from '../../store/actions';
 import List from '../../components/List/List';
 import AddNewList from './AddNewList/AddNewList';
 import styles from './Board.css';
@@ -62,6 +64,12 @@ class Board extends Component {
         ]
       }
     ]
+  }
+
+  componentDidMount() {
+    this.props.onListsFetch(
+      this.props.match.params.id
+    );
   }
 
   onCardAdd = (listId) => {
@@ -214,4 +222,8 @@ class Board extends Component {
   };
 }
 
-export default Board;
+const mapDispatchToProps = dispatch => ({
+  onListsFetch: (boardId) => dispatch(actions.fetchLists(boardId))
+});
+
+export default connect(null, mapDispatchToProps)(Board);

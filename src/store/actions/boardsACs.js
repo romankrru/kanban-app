@@ -1,6 +1,5 @@
 /* eslint-disable */
 import axios from 'axios';
-import uuidv4 from 'uuid/v4';
 
 import firebase from '../../firebase';
 
