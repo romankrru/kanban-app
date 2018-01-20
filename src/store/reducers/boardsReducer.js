@@ -21,7 +21,6 @@ const boardsReducer = (state = initialState, action) => {
       };
 
     case actionTypes.FETCH_BOARDS_SUCCESS:
-      console.log(state)
       return {
         ...state,
         items: action.boards,
@@ -29,6 +28,13 @@ const boardsReducer = (state = initialState, action) => {
       };
 
     case actionTypes.ADD_BOARD_SUCCES: {
+      return {
+        ...state,
+        items: {
+          ...state.items,
+          ...action.board,
+        }
+      }
       // console.log(action.newBoard)
     }
       // return {

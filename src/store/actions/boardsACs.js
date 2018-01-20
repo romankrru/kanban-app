@@ -22,28 +22,28 @@ const fetchBoardsFail = () => ({
 export const fetchBoards = () => (dispatch) => {
   dispatch(fetchBoardsStart());
 
-  firebase.database()
-    .ref('boards')
-    .on('value', (snapshot) => {
-      // gets around Redux panicking about actions in reducers
-      console.log(snapshot.val())
-      dispatch(fetchBoardsSuccess(snapshot.val()));
-      setTimeout(() => {
-        // const messages = snapshot.val() || [];
-        // dispatch(receiveMessages(messages))
-      }, 0);
-    });
-
-  // axios.get('https://kanban-580f4.firebaseio.com/boards.json')
-  //   .then((res) => {
-  //     dispatch(fetchBoardsSuccess(res.data));
-  //   })
-  //   .catch((err) => {
-  //     dispatch(fetchBoardsFail(err));
-  //     /* eslint-disable no-console */
-  //     console.log(err);
-  //     /* eslint-enable no-console */
+  // firebase.database()
+  //   .ref('boards')
+  //   .on('value', (snapshot) => {
+  //     // gets around Redux panicking about actions in reducers
+  //     console.log(snapshot.val())
+  //     dispatch(fetchBoardsSuccess(snapshot.val()));
+  //     setTimeout(() => {
+  //       // const messages = snapshot.val() || [];
+  //       // dispatch(receiveMessages(messages))
+  //     }, 0);
   //   });
+
+  axios.get('https://kanban-580f4.firebaseio.com/boards.json')
+    .then((res) => {
+      dispatch(fetchBoardsSuccess(res.data));
+    })
+    .catch((err) => {
+      dispatch(fetchBoardsFail(err));
+      /* eslint-disable no-console */
+      console.log(err);
+      /* eslint-enable no-console */
+    });
 };
 
 const addBoardStart = () => ({
@@ -59,16 +59,9 @@ const addBoardSucces = (board) => ({
   board,
 });
 
-// export const addBoard = (name, userId) => ({
-//   type: actionTypes.ADD_BOARD,
-//   boardId: uuidv4(),
-//   name,
-//   userId,
-// });
 
 export const addBoard = (name, userId) => (dispatch) => {
-  const newBoard = {
-    boardId: uuidv4(),
+  const newBoardData = {
     name,
     userId,
   };
@@ -78,10 +71,18 @@ export const addBoard = (name, userId) => (dispatch) => {
     .ref('boards')
     .push();
 
-  console.log(newBoardRef.key)
-  newBoardRef.set(newBoard);
+  // console.log(newBoardRef.key)
+  newBoardRef.set(newBoardData);
+
+  const newBoard = {
+    [newBoardRef.key]: {
+      ...newBoardData,
+    },
+  };
 
   dispatch(addBoardSucces(newBoard));
 };
 
-// export const remove
+export const removeBoard = boardId => {
+
+}
