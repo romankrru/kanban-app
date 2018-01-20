@@ -12,7 +12,7 @@ const BoardPreview = (props) => {
         className={styles.Trash}
         onClick={(e) => {
           e.preventDefault();
-          props.onBoardDelete(props.id);
+          props.onBoardRemove(props.id);
         }}
       />
     </Link>

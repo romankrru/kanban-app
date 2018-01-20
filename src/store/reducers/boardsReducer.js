@@ -27,7 +27,7 @@ const boardsReducer = (state = initialState, action) => {
         loading: false,
       };
 
-    case actionTypes.ADD_BOARD_SUCCES: {
+    case actionTypes.ADD_BOARD_SUCCES: 
       return {
         ...state,
         items: {
@@ -35,18 +35,18 @@ const boardsReducer = (state = initialState, action) => {
           ...action.board,
         }
       }
-      // console.log(action.newBoard)
-    }
-      // return {
-      //   ...state,
-      //   items: {
-      //     ...state.items,
-      //     [action.bordId]: {
-      //       name: action.name,
-      //       userId: action.userId,
-      //     },
-      //   },
-      // };
+    
+    case actionTypes.REMOVE_BOARD_SUCCES:
+      const newItems = Object.keys(state.items).filter(key => {
+        return key !== action.boardId;
+      });
+      
+      return {
+        ...state,
+        items: {
+          ...newItems,
+        }
+      };
 
     default:
       return state;

@@ -15,13 +15,13 @@ class BoardsList extends Component {
     this.props.fetchBoards();
   }
 
-  onBoardDelete = (id) => {
-    const newBoards = this.props.boards.filter(board => board.id !== id);
+  // onBoardDelete = (id) => {
+  //   const newBoards = this.props.boards.filter(board => board.id !== id);
 
-    this.setState({
-      boards: newBoards,
-    });
-  };
+  //   this.setState({
+  //     boards: newBoards,
+  //   });
+  // };
 
   render() {
     const boardsElements = Object.keys(this.props.boards).map(key => {
@@ -30,7 +30,7 @@ class BoardsList extends Component {
           title={this.props.boards[key].name}
           key={key}
           id={key}
-          onBoardDelete={this.onBoardDelete}
+          onBoardRemove={this.props.onBoardRemove}
         />
       );
     });
@@ -54,6 +54,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   fetchBoards: () => dispatch(actions.fetchBoards()),
   onBoardAdd: (name, userId) => dispatch(actions.addBoard(name, userId)),
+  onBoardRemove: (boardId) => dispatch(actions.removeBoard(boardId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BoardsList);

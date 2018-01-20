@@ -94,3 +94,17 @@ export const addBoard = (name, userId) => (dispatch) => {
 /*
  * REMOVE BOARD
 */
+
+const removeBoardSucces = boardId => ({
+  type: actionTypes.REMOVE_BOARD_SUCCES,
+  boardId,
+});
+
+export const removeBoard = boardId => (dispatch) => {
+  const boardRef = firebase
+    .database()
+    .ref(`/boards/${boardId}`)
+    .remove();
+
+  dispatch(removeBoardSucces(boardId));
+};
