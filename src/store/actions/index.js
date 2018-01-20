@@ -1,5 +1,5 @@
 export {
-  fetchBoards,
+  initBoards,
   addBoard,
   removeBoard,
 } from './boardsACs.js';

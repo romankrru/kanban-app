@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import firebase from '../../firebase';
 import * as actions from '../../store/actions';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import BoardPreview from '../../components/BoardPreview/BoardPreview';
@@ -12,7 +13,28 @@ import styles from './BoardsList.css';
 
 class BoardsList extends Component {
   componentDidMount() {
-    this.props.fetchBoards();
+    this.props.initBoards();
+  }
+
+  onBoardAdd = (name, userId) => {
+    const newBoardData = {
+      name,
+      userId,
+    };
+
+    const newBoardRef = firebase
+      .database()
+      .ref('boards')
+      .push();
+
+    newBoardRef.set(newBoardData);
+  }
+
+  onBoardRemove = boardId => {
+    const boardRef = firebase
+      .database()
+      .ref(`/boards/${boardId}`)
+      .remove();
   }
 
   render() {
@@ -22,7 +44,7 @@ class BoardsList extends Component {
           title={this.props.boards[key].name}
           key={key}
           id={key}
-          onBoardRemove={this.props.onBoardRemove}
+          onBoardRemove={this.onBoardRemove}
         />
       );
     });
@@ -32,7 +54,7 @@ class BoardsList extends Component {
         <Spinner show={this.props.isLoading} />
         {boardsElements}
         <AddNewBoardButton />
-        <Route path={`/add-new-board`} render={props => <AddNewBoard {...props} onBoardAdd={this.props.onBoardAdd} />} />
+        <Route path={`/add-new-board`} render={props => <AddNewBoard {...props} onBoardAdd={this.onBoardAdd} />} />
       </div>
     );
   }
@@ -44,9 +66,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchBoards: () => dispatch(actions.fetchBoards()),
-  onBoardAdd: (name, userId) => dispatch(actions.addBoard(name, userId)),
-  onBoardRemove: (boardId) => dispatch(actions.removeBoard(boardId)),
+  initBoards: () => dispatch(actions.initBoards()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BoardsList);
