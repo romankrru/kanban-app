@@ -6,6 +6,10 @@ import firebase from '../../firebase';
 
 import * as actionTypes from './actionTypes';
 
+/*
+ * FETCH BOARDS
+*/
+
 const fetchBoardsStart = () => ({
   type: actionTypes.FETCH_BOARDS_START,
 });
@@ -46,6 +50,10 @@ export const fetchBoards = () => (dispatch) => {
     });
 };
 
+/*
+ * ADD BOARD
+*/
+
 const addBoardStart = () => ({
   type: actionTypes.ADD_BOARD_START,
 });
@@ -83,6 +91,6 @@ export const addBoard = (name, userId) => (dispatch) => {
   dispatch(addBoardSucces(newBoard));
 };
 
-export const removeBoard = boardId => {
-
-}
+/*
+ * REMOVE BOARD
+*/
