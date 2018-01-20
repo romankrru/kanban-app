@@ -20,23 +20,37 @@ class Board extends Component {
     // TODO: usnsubscribe from firebase
   }
 
-  onCardAdd = (listId) => {
-    const lists = [...this.state.lists];
-    const updatedLists = lists.map(l => {
-      if (l.id === listId) {
-        l.cards.push({
-          id: Math.random(),
-          name: 'New card',
-          date: new Date(),
-        });
-      }
+  onCardAdd = (listId, boardId, userId) => {
+    const newCard = {
+      name: 'New card',
+      listId,
+      boardId,
+      userId,
+    };
 
-      return l;
-    });
+    const cardsRef = firebase
+      .database()
+      .ref(`/cards`)
+      .push();
 
-    this.setState({
-      lists: updatedLists,
-    });
+    cardsRef.set(newCard);
+
+    // const lists = [...this.state.lists];
+    // const updatedLists = lists.map(l => {
+    //   if (l.id === listId) {
+    //     l.cards.push({
+    //       id: Math.random(),
+    //       name: 'New card',
+    //       date: new Date(),
+    //     });
+    //   }
+
+    //   return l;
+    // });
+
+    // this.setState({
+    //   lists: updatedLists,
+    // });
   }
 
   onCardDelete = (listId, cardId) => {
@@ -135,11 +149,15 @@ class Board extends Component {
   }
 
   render() {
+    console.log(this.props)
+
     const lists = Object.keys(this.props.lists).map(key => {
       return (
         <List
           id={key}
           key={key}
+          boardId={this.props.match.params.id}
+          userId={'user1'}
           name={this.props.lists[key].name}
           cards={this.getVisibleCards(this.props.cards, key)}
           onCardAdd={this.onCardAdd}

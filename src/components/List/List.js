@@ -6,7 +6,6 @@ import styles from './List.css';
 import Editable from '../Editable/Editable';
 
 const List = (props) => {
-  
   const cards = Object.keys(props.cards).map(key => {
     return (
       <Card
@@ -19,19 +18,6 @@ const List = (props) => {
       />
     );
   });
-  // props.cards.map(card => {
-  //   return (
-  //     <Card
-  //       id={card.id}
-  //       key={card.id}
-  //       name={card.name}
-  //       date={card.date}
-  //       listId={props.id}
-  //       onCardDelete={props.onCardDelete}
-  //       onCardEdit={props.onCardEdit}
-  //     />
-  //   );
-  // });
   
   return (
     <div className={styles.ListWrapper}>
@@ -50,7 +36,7 @@ const List = (props) => {
       </ul>
       <div
         className={styles.AddCard}
-        onClick={() => props.onCardAdd(props.id)}
+        onClick={() => props.onCardAdd(props.id, props.boardId, props.userId)}
       >
         Add new Card
       </div>
