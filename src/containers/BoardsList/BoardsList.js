@@ -15,14 +15,6 @@ class BoardsList extends Component {
     this.props.fetchBoards();
   }
 
-  // onBoardDelete = (id) => {
-  //   const newBoards = this.props.boards.filter(board => board.id !== id);
-
-  //   this.setState({
-  //     boards: newBoards,
-  //   });
-  // };
-
   render() {
     const boardsElements = Object.keys(this.props.boards).map(key => {
       return (
